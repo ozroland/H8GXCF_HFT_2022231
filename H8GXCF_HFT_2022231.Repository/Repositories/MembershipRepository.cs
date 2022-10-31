@@ -1,4 +1,5 @@
 ﻿using H8GXCF_HFT_2022231.Models;
+using H8GXCF_HFT_2022231.Repository.Data;
 using H8GXCF_HFT_2022231.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,8 @@ namespace H8GXCF_HFT_2022231.Repository.Repositories
 {
     public class MembershipRepository : Repository<Membership>, IMembershipRepository
     {
+        public MembershipRepository(GymRegisterDbContext ctx) : base(ctx)
+        {
+        }
     }
 }
