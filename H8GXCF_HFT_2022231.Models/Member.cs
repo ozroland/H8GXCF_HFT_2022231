@@ -21,6 +21,8 @@ namespace H8GXCF_HFT_2022231.Models
         public string Name { get; set; }
         public Sex Sex { get; set; }
         public int Age { get; set; }
+        [NotMapped]
+        public virtual Gym Gym { get; set; }
         [ForeignKey(nameof(Gym))]
         public int GymID { get; set; }
         [ForeignKey(nameof(Member))]
