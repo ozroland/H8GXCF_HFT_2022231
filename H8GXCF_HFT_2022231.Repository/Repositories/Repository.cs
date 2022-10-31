@@ -1,4 +1,5 @@
 ﻿using H8GXCF_HFT_2022231.Models;
+using H8GXCF_HFT_2022231.Repository.Data;
 using H8GXCF_HFT_2022231.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,41 @@ namespace H8GXCF_HFT_2022231.Repository.Repositories
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
+        protected GymRegisterDbContext ctx;
+        public Repository(GymRegisterDbContext ctx)
+        {
+            this.ctx = ctx;
+        }
         public void Create(T item)
         {
-            throw new NotImplementedException();
+            ctx.Set<T>().Add(item);
+            ctx.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            ctx.Set<T>().Remove(Read(id));
+            ctx.SaveChanges();
         }
 
         public T Read(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Set<T>().FirstOrDefault(item => item.Id == id);
         }
 
         public IQueryable<T> ReadAll()
         {
-            throw new NotImplementedException();
+            return ctx.Set<T>();
         }
 
         public void Update(T item)
         {
-            throw new NotImplementedException();
+            var old = Read(item.Id);
+            foreach (var prop in old.GetType().GetProperties())
+            {
+                prop.SetValue(old, prop.GetValue(item));
+            }
+            ctx.SaveChanges();
         }
     }
 }
