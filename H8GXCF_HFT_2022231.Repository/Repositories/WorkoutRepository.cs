@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Repository.Repositories
 {
-    public class GymRepository : Repository<Gym>, IGymRepository
+    public class WorkoutRepository : Repository<Workout>, IWorkoutRepository
     {
-        public GymRepository(GymRegisterDbContext ctx) : base(ctx)
+        public WorkoutRepository(GymRegisterDbContext ctx) : base(ctx)
         {
         }
     }

@@ -8,19 +8,20 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Models
 {
-    public enum Category
-    {
-        Student,
-        Normal,
-        Retired
-    }
     [Table("membership")]
     public class Membership : Entity
     {
-        [MaxLength(100)]
         [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
-        public int HowLong { get; set; }
-        public Category Category { get; set; }
+        [Required]
+        public bool Active { get; set; }
+        [Required]
+        public DateTime JoiningDate { get; set; }
+        [Required]
+        public DateTime EndingDate { get; set; }
+        public int SignupFee { get; set; }
+        [NotMapped]
+        public virtual ICollection<Member> Members { get; set; }
     }
 }

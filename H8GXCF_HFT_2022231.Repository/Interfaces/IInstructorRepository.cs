@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Repository.Interfaces
 {
-    public interface IGymRepository : IRepository<Gym>
+    public interface IInstructorRepository : IRepository<Instructor>
     {
     }
 }

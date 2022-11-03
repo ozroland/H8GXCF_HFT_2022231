@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Models
 {
-    [Table("gym")]
-    public class Gym : Entity
+    [Table("workout")]
+    public class Workout : Entity
     {
-        [MaxLength(100)]
         [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
-        public string Location { get; set; }
+        [MaxLength(100)]
+        public string Description { get; set; }
+        [NotMapped]
+        public ICollection<WorkoutPlan> WorkoutPlans { get; set; }
     }
 }

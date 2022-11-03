@@ -18,20 +18,7 @@ namespace H8GXCF_HFT_2022231.Test
         Mock<IMemberRepository> mockMemberRepository;
         [SetUp]
         public void Init()
-        {
-            Gym fakeGym = new Gym()
-            {
-                Id = 1,
-                Name = "Arnold",
-                Location = "Budapest"
-            };
-            Membership membership = new Membership()
-            {
-                Id=1,
-                Name = "Diák",
-                Category = Category.Student,
-                HowLong = 13
-            };
+        { 
             var Members = new List<Member>()
             {
                 new Member()
@@ -39,31 +26,29 @@ namespace H8GXCF_HFT_2022231.Test
                     Id = 1,
                     Name = "Roland",
                     Age = 19,
-                    Sex = Sex.Male,
-                    Gym = fakeGym,
-                    MembershipID = membership.Id
+                    Gender = Gender.Male,
+
                 },
                 new Member()
                 {
                     Id = 2,
                     Name = "Lili",
                     Age = 22,
-                    Sex = Sex.Female,
-                    Gym = fakeGym,
-                }
+                    Gender = Gender.Female,
+                },
+                new Member()
+                {
+                    Id = 3,
+                    Name = "Pali",
+                    Age = 19,
+                    Gender = Gender.Male,
+                },
             }.AsQueryable();
 
             mockMemberRepository = new Mock<IMemberRepository>();
             mockMemberRepository.Setup(r => r.ReadAll()).Returns(Members);
 
             memberLogic = new MemberLogic(mockMemberRepository.Object);
-        }
-        [Test]
-        public void CountMan()
-        {
-            var result = memberLogic.CountMan();
-
-            Assert.That(result, Is.EqualTo(1));
         }
     }
 }

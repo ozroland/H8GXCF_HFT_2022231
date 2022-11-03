@@ -8,35 +8,20 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Models
 {
-    public enum Gender
-    {
-        Male,
-        Female
-    }
-    [Table("member")]
-    public class Member : Entity
+    [Table("instructor")]
+    public class Instructor : Entity
     {
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
         [Required]
-        [MaxLength(12)]
+        [MaxLength(11)]
         public string Contact { get; set; }
         [MaxLength(100)]
         public string Address { get; set; }
         [MaxLength(50)]
         public string Email { get; set; }
-        [Required]
-        [MaxLength(3)]
-        public int Age { get; set; }
-        [Required]
-        public Gender Gender { get; set; }
-        [NotMapped]
-        public virtual Membership Membership { get; set; }
-        [ForeignKey(nameof(Membership))]
-        public int MembershipID { get; set; }
         [NotMapped]
         public ICollection<WorkoutPlan> WorkoutPlans { get; set; }
-
     }
 }

@@ -40,9 +40,5 @@ namespace H8GXCF_HFT_2022231.Logic.Services
         {
            memberRepository.Update(member);
         }
-        public int CountMan()
-        {
-            return memberRepository.ReadAll().Count(m => m.Sex == Sex.Male);
-        }
     }
 }
