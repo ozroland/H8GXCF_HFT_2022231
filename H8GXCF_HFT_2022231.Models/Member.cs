@@ -36,7 +36,9 @@ namespace H8GXCF_HFT_2022231.Models
         [ForeignKey(nameof(Membership))]
         public int MembershipID { get; set; }
         [NotMapped]
-        public ICollection<WorkoutPlan> WorkoutPlans { get; set; }
+        public virtual Instructor Instructor { get; set; }
+        [ForeignKey(nameof(Instructor))]
+        public int InstructorID { get; set; }
 
     }
 }

@@ -50,5 +50,11 @@ namespace H8GXCF_HFT_2022231.Test
 
             memberLogic = new MemberLogic(mockMemberRepository.Object);
         }
+        [Test]
+        public void AVGAgeTest()
+        {
+            var result = memberLogic.AVGAge();
+            Assert.That(result, Is.EqualTo(20));
+        }
     }
 }

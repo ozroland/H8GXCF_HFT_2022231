@@ -40,5 +40,9 @@ namespace H8GXCF_HFT_2022231.Logic.Services
         {
            memberRepository.Update(member);
         }
+        public double AVGAge()
+        {
+            return memberRepository.ReadAll().Average(t => t.Age);
+        } 
     }
 }

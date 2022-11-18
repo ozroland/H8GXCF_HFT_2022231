@@ -11,8 +11,6 @@ namespace H8GXCF_HFT_2022231.Repository.Data
     public partial class GymRegisterDbContext : DbContext
     {
         public virtual DbSet<Member> Members { get; set; }
-        public virtual DbSet<Workout> Workouts { get; set; }
-        public virtual DbSet<WorkoutPlan> WorkoutPlans { get; set; }
         public virtual DbSet<Membership> Memberships { get; set; }
         public virtual DbSet<Instructor> Instructors { get; set; }
         public GymRegisterDbContext()
@@ -39,32 +37,64 @@ namespace H8GXCF_HFT_2022231.Repository.Data
                 .HasForeignKey(member => member.MembershipID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
-
-            modelBuilder.Entity<WorkoutPlan>(entity =>
+            modelBuilder.Entity<Member>(entity =>
             {
-                entity.HasOne(workoutplan => workoutplan.Instructor)
-                .WithMany(instructor => instructor.WorkoutPlans)
-                .HasForeignKey(workoutplan => workoutplan.InstructorID)
+                entity.HasOne(member => member.Instructor)
+                .WithMany(instructor => instructor.Members)
+                .HasForeignKey(member => member.InstructorID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
-
-            modelBuilder.Entity<WorkoutPlan>(entity =>
+            Instructor pali = new Instructor()
             {
-                entity.HasOne(workoutplan => workoutplan.Workout)
-                .WithMany(workout => workout.WorkoutPlans)
-                .HasForeignKey(workoutplan => workoutplan.WorkoutID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-            });
+                Id = 1,
+                Name = "Egyed Pál",
+                Contact = "+36702652863",
+                Address = "1034 Budapest Bécsi út 104-108",
+                Email = "egyed.pali@gmail.com",
+            };
+            Member roli = new Member() {
+                Id = 1,
+                Name = "Őz Roland",
+                Contact = "+36306018905",
+                Address = "1034 Budapest Bécsi út 104-108",
+                Email = "ozroland46@gmail.com",
+                Age = 20,
+                Gender = Gender.Male,
+                Membership = new Membership() {
+                    Id = 1,
+                    Name = "Diák",
+                    Active = true,
+                    JoiningDate = DateTime.Parse("2022.07.20"),
+                    SignupFee = 15000,
+                },
+                MembershipID = 1,
+                Instructor = pali,
+                InstructorID = pali.Id,
+            };
+            Member balazs = new Member(){
+                Id = 2,
+                Name = "Lipák Balázs",
+                Contact= "+36501345139",
+                Address= "1034 Budapest Görgely Artúr út 98",
+                Email= "lipak.bazsi@gmail.com",
+                Age = 20,
+                Gender= Gender.Male,
+                Membership= new Membership() {
+                    Id = 2,
+                    Name = "Teljes",
+                    Active= false,
+                    JoiningDate = DateTime.Parse("2021.05.08"),
+                    EndingDate = DateTime.Parse("2022.09.17"),
+                    SignupFee = 20000,
+                },
+                MembershipID= 2,
+                Instructor = pali,
+                InstructorID = pali.Id,
+            };
 
-            modelBuilder.Entity<WorkoutPlan>(entity =>
-            {
-                entity.HasOne(workoutplan => workoutplan.Member)
-                .WithMany(member => member.WorkoutPlans)
-                .HasForeignKey(workoutplan => workoutplan.MemberID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-
-
+            modelBuilder.Entity<Member>().HasData(roli,pali);
+            modelBuilder.Entity<Membership>().HasData(roli.Membership, balazs.Membership);
+            modelBuilder.Entity<Instructor>().HasData(pali);
 
         }
     }

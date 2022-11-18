@@ -22,6 +22,6 @@ namespace H8GXCF_HFT_2022231.Models
         [MaxLength(50)]
         public string Email { get; set; }
         [NotMapped]
-        public ICollection<WorkoutPlan> WorkoutPlans { get; set; }
+        public ICollection<Member> Members { get; set; }
     }
 }

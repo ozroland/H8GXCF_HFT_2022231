@@ -18,7 +18,6 @@ namespace H8GXCF_HFT_2022231.Models
         public bool Active { get; set; }
         [Required]
         public DateTime JoiningDate { get; set; }
-        [Required]
         public DateTime EndingDate { get; set; }
         public int SignupFee { get; set; }
         [NotMapped]
