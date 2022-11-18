@@ -43,6 +43,12 @@ namespace H8GXCF_HFT_2022231.Logic.Services
         public double AVGAge()
         {
             return memberRepository.ReadAll().Average(t => t.Age);
-        } 
+        }
+        public List<string> MaleActiveMembers()
+        {
+            return memberRepository.ReadAll()
+                .Where(t => t.Gender == Gender.Male && t.Membership.Active)
+                .Select(t => t.Name).ToList();
+        }
     }
 }

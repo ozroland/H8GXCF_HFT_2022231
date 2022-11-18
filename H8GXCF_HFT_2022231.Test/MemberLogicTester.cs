@@ -18,30 +18,57 @@ namespace H8GXCF_HFT_2022231.Test
         Mock<IMemberRepository> mockMemberRepository;
         [SetUp]
         public void Init()
-        { 
+        {
+            Instructor pali = new Instructor()
+            {
+                Id = 1,
+                Name = "Egyed Pál",
+                Contact = "+36702652863",
+                Address = "1034 Budapest Bécsi út 104-108",
+                Email = "egyed.pali@gmail.com",
+            };
             var Members = new List<Member>()
             {
-                new Member()
+                new Member(){
+                Id = 1,
+                Name = "Őz Roland",
+                Contact = "+36306018905",
+                Address = "1034 Budapest Bécsi út 104-108",
+                Email = "ozroland46@gmail.com",
+                Age = 20,
+                Gender = Gender.Male,
+                Membership = new Membership()
                 {
                     Id = 1,
-                    Name = "Roland",
-                    Age = 19,
-                    Gender = Gender.Male,
-
+                    Name = "Diák",
+                    Active = true,
+                    JoiningDate = DateTime.Parse("2022.07.20"),
+                    SignupFee = 15000,
                 },
-                new Member()
+                MembershipID = 1,
+                Instructor = pali,
+                InstructorID = pali.Id,
+                },
+                new Member(){
+                Id = 2,
+                Name = "Lipák Balázs",
+                Contact = "+36501345139",
+                Address = "1034 Budapest Görgely Artúr út 98",
+                Email = "lipak.bazsi@gmail.com",
+                Age = 20,
+                Gender = Gender.Male,
+                Membership = new Membership()
                 {
                     Id = 2,
-                    Name = "Lili",
-                    Age = 22,
-                    Gender = Gender.Female,
+                    Name = "Teljes",
+                    Active = false,
+                    JoiningDate = DateTime.Parse("2021.05.08"),
+                    EndingDate = DateTime.Parse("2022.09.17"),
+                    SignupFee = 20000,
                 },
-                new Member()
-                {
-                    Id = 3,
-                    Name = "Pali",
-                    Age = 19,
-                    Gender = Gender.Male,
+                MembershipID = 2,
+                Instructor = pali,
+                InstructorID = pali.Id,
                 },
             }.AsQueryable();
 
@@ -55,6 +82,12 @@ namespace H8GXCF_HFT_2022231.Test
         {
             var result = memberLogic.AVGAge();
             Assert.That(result, Is.EqualTo(20));
+        }
+        [Test]
+        public void MaleActiveMembers()
+        {
+            var result = memberLogic.MaleActiveMembers();
+            Assert.That(result, Is.EqualTo(new List<string>() {"Őz Roland"}));
         }
     }
 }
