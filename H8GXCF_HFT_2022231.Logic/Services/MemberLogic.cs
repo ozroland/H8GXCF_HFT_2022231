@@ -44,11 +44,22 @@ namespace H8GXCF_HFT_2022231.Logic.Services
         {
             return memberRepository.ReadAll().Average(t => t.Age);
         }
-        public List<string> MaleActiveMembers()
+        public List<string> ActiveMembers()
         {
             return memberRepository.ReadAll()
-                .Where(t => t.Gender == Gender.Male && t.Membership.Active)
+                .Where(t => t.Membership.Active)
                 .Select(t => t.Name).ToList();
+        }
+        public Dictionary<string,int> MemberTypeCount()
+        {
+            var result =  from x in memberRepository.ReadAll()
+                   group x by x.Membership.Name into g
+                   select new 
+                   {
+                       g.Key,
+                       Count = g.Count()
+                   };
+            return result.ToDictionary(x => x.Key, x => x.Count);
         }
     }
 }

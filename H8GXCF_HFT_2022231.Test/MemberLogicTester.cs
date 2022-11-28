@@ -84,10 +84,21 @@ namespace H8GXCF_HFT_2022231.Test
             Assert.That(result, Is.EqualTo(20));
         }
         [Test]
-        public void MaleActiveMembers()
+        public void ActiveMembers()
         {
-            var result = memberLogic.MaleActiveMembers();
+            var result = memberLogic.ActiveMembers();
             Assert.That(result, Is.EqualTo(new List<string>() {"Őz Roland"}));
+        }
+        [Test]
+        public void MemberTypeCount()
+        {
+            var result = memberLogic.MemberTypeCount();
+            var expected = new Dictionary<string, int>(){
+                {"Teljes", 1},
+                {"Diák", 1 },
+            };
+            Assert.That(result, Is.EqualTo(expected));
+            
         }
     }
 }
