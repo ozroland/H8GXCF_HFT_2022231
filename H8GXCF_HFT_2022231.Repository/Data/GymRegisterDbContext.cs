@@ -44,57 +44,73 @@ namespace H8GXCF_HFT_2022231.Repository.Data
                 .HasForeignKey(member => member.InstructorID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             });
-            Instructor pali = new Instructor()
+            var pali = new Instructor()
             {
                 Id = 1,
                 Name = "Egyed Pál",
-                Contact = "+36702652863",
+                Contact = "+36202634163",
                 Address = "1034 Budapest Bécsi út 104-108",
-                Email = "egyed.pali@gmail.com",
+                Email = "egyed.pal@gmail.com",
             };
-            Member roli = new Member() {
-                Id = 1,
-                Name = "Őz Roland",
-                Contact = "+36306018905",
-                Address = "1034 Budapest Bécsi út 104-108",
-                Email = "ozroland46@gmail.com",
-                Age = 20,
-                Gender = Gender.Male,
-                Membership = new Membership() {
-                    Id = 1,
-                    Name = "Diák",
-                    Active = true,
-                    JoiningDate = DateTime.Parse("2022.07.20"),
-                    SignupFee = 15000,
-                },
-                MembershipID = 1,
-                Instructor = pali,
-                InstructorID = pali.Id,
-            };
-            Member balazs = new Member(){
+            var peti = new Instructor()
+            {
                 Id = 2,
-                Name = "Lipák Balázs",
-                Contact= "+36501345139",
-                Address= "1034 Budapest Görgely Artúr út 98",
-                Email= "lipak.bazsi@gmail.com",
-                Age = 20,
-                Gender= Gender.Male,
-                Membership= new Membership() {
-                    Id = 2,
-                    Name = "Teljes",
-                    Active= false,
-                    JoiningDate = DateTime.Parse("2021.05.08"),
-                    EndingDate = DateTime.Parse("2022.09.17"),
-                    SignupFee = 20000,
-                },
-                MembershipID= 2,
-                Instructor = pali,
-                InstructorID = pali.Id,
+                Name = "Slezák Péter",
+                Contact = "+36702321083",
+                Address = "1034 Budapest Bécsi út 10",
+                Email = "slezak.peter@gmail.com",
+            };
+            var robi = new Instructor()
+            {
+                Id = 3,
+                Name = "Takács Róbert",
+                Contact = "+36303210019",
+                Address = "1034 Budapest Bécsi út 10",
+                Email = "slezak.peter@gmail.com",
             };
 
-            modelBuilder.Entity<Member>().HasData(roli,pali);
-            modelBuilder.Entity<Membership>().HasData(roli.Membership, balazs.Membership);
-            modelBuilder.Entity<Instructor>().HasData(pali);
+            var roland = new Member()
+            {
+                Id = 1,
+                Name = "Őz Roland",
+                Contact = "+36806348231",
+                Address = "1034 Budapest Bécsi út 104-108",
+                Email = "oz.roland@gmail.com",
+                Age = 20,
+                Gender = Gender.Male,
+            };
+            var lipak = new Member()
+            {
+                Id = 2,
+                Name = "Lipák Balázs",
+                Contact = "+36901334513",
+                Address = "1034 Budapest Görgely Artúr út 98",
+                Email = "lipak.balazs@gmail.com",
+                Age = 20,
+                Gender = Gender.Male,
+            };
+
+            var diak = new Membership()
+            {
+                Id = 1,
+                Name = "Diák",
+                Active = true,
+                JoiningDate = DateTime.Parse("2022.07.20"),
+                SignupFee = 15000,
+            };
+            var teljes = new Membership()
+            {
+                Id = 2,
+                Name = "Teljes",
+                Active = false,
+                JoiningDate = DateTime.Parse("2021.05.08"),
+                EndingDate = DateTime.Parse("2022.09.17"),
+                SignupFee = 20000,
+            };
+
+            modelBuilder.Entity<Member>().HasData(roland,lipak);
+            modelBuilder.Entity<Membership>().HasData(diak, teljes);
+            modelBuilder.Entity<Instructor>().HasData(pali,peti,robi);
 
         }
     }

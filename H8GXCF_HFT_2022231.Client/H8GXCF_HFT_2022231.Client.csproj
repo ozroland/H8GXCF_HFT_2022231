@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ConsoleMenu-simple" Version="2.4.3" />
+    <PackageReference Include="ConsoleTools" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\H8GXCF_HFT_2022231.Models\H8GXCF_HFT_2022231.Models.csproj" />
   </ItemGroup>
 
