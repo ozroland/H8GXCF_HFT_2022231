@@ -24,7 +24,6 @@ namespace H8GXCF_HFT_2022231.Models
         [MaxLength(50)]
         public string Name { get; set; }
         [Required]
-        [MaxLength(11)]
         public string Contact { get; set; }
         [MaxLength(100)]
         public string Address { get; set; }
