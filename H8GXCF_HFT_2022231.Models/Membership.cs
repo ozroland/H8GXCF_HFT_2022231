@@ -16,7 +16,6 @@ namespace H8GXCF_HFT_2022231.Models
         {
             Members = new HashSet<Member>();
         }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }

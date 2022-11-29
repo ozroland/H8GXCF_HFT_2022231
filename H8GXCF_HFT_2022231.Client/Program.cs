@@ -184,7 +184,6 @@ namespace H8GXCF_HFT_2022231.Client
                 rest3.Put(one, "instructor");
             }
         }
-
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:63312/", "member");

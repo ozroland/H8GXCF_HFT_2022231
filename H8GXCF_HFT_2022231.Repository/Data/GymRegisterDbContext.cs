@@ -17,10 +17,6 @@ namespace H8GXCF_HFT_2022231.Repository.Data
         {
             this.Database.EnsureCreated();
         }
-        public GymRegisterDbContext(DbContextOptions<GymRegisterDbContext> options) : base(options)
-        {
-            this.Database.EnsureCreated();
-        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -35,14 +31,14 @@ namespace H8GXCF_HFT_2022231.Repository.Data
                 entity.HasOne(member => member.Membership)
                 .WithMany(membership => membership.Members)
                 .HasForeignKey(member => member.MembershipID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Member>(entity =>
             {
                 entity.HasOne(member => member.Instructor)
                 .WithMany(instructor => instructor.Members)
                 .HasForeignKey(member => member.InstructorID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
             });
             var pali = new Instructor()
             {
