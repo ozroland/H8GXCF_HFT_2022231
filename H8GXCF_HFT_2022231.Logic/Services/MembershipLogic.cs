@@ -1,6 +1,7 @@
 ﻿using H8GXCF_HFT_2022231.Logic.Interfaces;
 using H8GXCF_HFT_2022231.Models;
 using H8GXCF_HFT_2022231.Repository.Interfaces;
+using H8GXCF_HFT_2022231.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Logic.Services
 {
-    public class MembershipLogic : ILogic<Membership>
+    public class MembershipLogic : IMembershipLogic
     {
-        IMembershipRepository membershipRepository;
-        public MembershipLogic(IMembershipRepository membershipRepository)
+        IRepository<Membership> membershipRepository;
+        public MembershipLogic(IRepository<Membership> membershipRepository)
         {
             this.membershipRepository = membershipRepository;
         }
@@ -45,9 +46,9 @@ namespace H8GXCF_HFT_2022231.Logic.Services
             return membershipRepository.Read(id);
         }
 
-        public IEnumerable<Membership> ReadAll()
+        public IQueryable<Membership> ReadAll()
         {
-            throw new NotImplementedException();
+            return membershipRepository.ReadAll();
         }
 
         public void Update(Membership item)

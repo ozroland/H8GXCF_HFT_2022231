@@ -15,7 +15,7 @@ namespace H8GXCF_HFT_2022231.Client
         {
             if (entity == "Member")
             {
-                Console.Write("Enter Music Name: ");
+                Console.Write("Enter member Name: ");
                 string name = Console.ReadLine();
                 rest.Post(new Member() { Name = name }, "member");
             }
@@ -50,9 +50,9 @@ namespace H8GXCF_HFT_2022231.Client
                     Console.WriteLine(item.Id + " - " + item.Name);
                 }
             }
-            else
+            else if (entity == "Instructor")
             {
-                List<Instructor> instructors = rest3.Get<Instructor>("nstructor");
+                List<Instructor> instructors = rest3.Get<Instructor>("instructor");
                 foreach (var item in instructors)
                 {
                     Console.WriteLine(item.Id + " - " + item.Name);
@@ -148,7 +148,7 @@ namespace H8GXCF_HFT_2022231.Client
                 Console.Write("Enter Member's ID to update: ");
                 int id = int.Parse(Console.ReadLine());
                 Member one = rest.Get<Member>(id, "member");
-                Console.Write($"New title [old: {one.Name}]: ");
+                Console.Write($"New name [old: {one.Name}]: ");
                 string title = Console.ReadLine();
                 one.Name = title;
                 rest.Put(one, "member");
@@ -187,11 +187,11 @@ namespace H8GXCF_HFT_2022231.Client
 
         static void Main(string[] args)
         {
-            rest = new RestService("http://localhost:13309/", "member");
-            rest2 = new RestService("http://localhost:13309/", "membership");
-            rest3 = new RestService("http://localhost:13309/", "instructor");
+            rest = new RestService("http://localhost:63312/", "member");
+            rest2 = new RestService("http://localhost:63312/", "membership");
+            rest3 = new RestService("http://localhost:63312/", "instructor");
 
-            var albumSubMenu = new ConsoleMenu(args, level: 1)
+            var membershipSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Membership"))
                 .Add("Create", () => Create("Membership"))
                 .Add("Delete", () => Delete("Membership"))
@@ -199,7 +199,7 @@ namespace H8GXCF_HFT_2022231.Client
                 .Add("Exit", ConsoleMenu.Close);
 
 
-            var performerSubMenu = new ConsoleMenu(args, level: 1)
+            var instructorSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Instructor"))
                 .Add("Create", () => Create("Instructor"))
                 .Add("Delete", () => Delete("Instructor"))
@@ -207,7 +207,7 @@ namespace H8GXCF_HFT_2022231.Client
                 .Add("Exit", ConsoleMenu.Close);
 
 
-            var musicSubMenu = new ConsoleMenu(args, level: 1)
+            var memberSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Member"))
                 .Add("Create", () => Create("Member"))
                 .Add("Delete", () => Delete("Member"))
@@ -216,7 +216,7 @@ namespace H8GXCF_HFT_2022231.Client
 
             var nonCrudMenu = new ConsoleMenu(args, level: 1)
                 .Add("MaleFemaleCount", () => List("MaleFemaleCount"))
-                .Add("MemberTypeCount", () => List("MemberTypeCount"))
+                .Add("InstructorClientCount", () => List("InstructorClientCount"))
                 .Add("MemberTypeCount", () => List("MemberTypeCount"))
                 .Add("AverageFeeByGender", () => List("AverageFeeByGender"))
                 .Add("ActiveMembersAverageAgeAndCount", () => List("ActiveMembersAverageAgeAndCount"))
@@ -224,9 +224,9 @@ namespace H8GXCF_HFT_2022231.Client
 
 
             var menu = new ConsoleMenu(args, level: 0)
-                .Add("Members", () => musicSubMenu.Show())
-                .Add("Membership", () => performerSubMenu.Show())
-                .Add("Instructor", () => albumSubMenu.Show())
+                .Add("Members", () => memberSubMenu.Show())
+                .Add("Membership", () => membershipSubMenu.Show())
+                .Add("Instructor", () => instructorSubMenu.Show())
                 .Add("NonCrudMenu", () => nonCrudMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 

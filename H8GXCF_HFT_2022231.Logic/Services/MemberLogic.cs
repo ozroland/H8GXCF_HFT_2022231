@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Logic.Services
 {
-    public class MemberLogic : ILogic<Member>
+    public class MemberLogic : IMemberLogic
     {
-        IMemberRepository memberRepository;
-        public MemberLogic(IMemberRepository memberRepository)
+        IRepository<Member> memberRepository;
+        public MemberLogic(IRepository<Member> memberRepository)
         {
             this.memberRepository = memberRepository;
         }
@@ -45,11 +45,10 @@ namespace H8GXCF_HFT_2022231.Logic.Services
             return memberRepository.Read(id);
         }
 
-        public IEnumerable<Member> ReadAll()
+        public IQueryable<Member> ReadAll()
         {
             return memberRepository.ReadAll();
         }
-
         public void Update(Member item)
         {
             if (item == null)

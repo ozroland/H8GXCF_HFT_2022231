@@ -1,6 +1,7 @@
 ﻿using H8GXCF_HFT_2022231.Logic.Interfaces;
 using H8GXCF_HFT_2022231.Models;
 using H8GXCF_HFT_2022231.Repository.Interfaces;
+using H8GXCF_HFT_2022231.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Logic.Services
 {
-    public class InstructorLogic : ILogic<Instructor>
+    public class InstructorLogic : IInstructorLogic
     {
-        IInstructorRepository instroctorRepository;
-        public InstructorLogic(IInstructorRepository instroctorRepository)
+        IRepository<Instructor> instroctorRepository;
+        public InstructorLogic(IRepository<Instructor> instroctorRepository)
         {
             this.instroctorRepository = instroctorRepository;
         }
@@ -24,7 +25,6 @@ namespace H8GXCF_HFT_2022231.Logic.Services
             }
             instroctorRepository.Create(item);
         }
-
         public void Delete(int id)
         {
             var instructor = instroctorRepository.Read(id);
@@ -44,12 +44,10 @@ namespace H8GXCF_HFT_2022231.Logic.Services
             }
             return instroctorRepository.Read(id);
         }
-
-        public IEnumerable<Instructor> ReadAll()
+        public IQueryable<Instructor> ReadAll()
         {
-            throw new NotImplementedException();
+            return instroctorRepository.ReadAll();
         }
-
         public void Update(Instructor item)
         {
             if (item == null)

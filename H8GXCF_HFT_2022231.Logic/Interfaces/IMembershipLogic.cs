@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace H8GXCF_HFT_2022231.Logic.Interfaces
 {
-    public interface ILogic<T>
+    public interface IMembershipLogic
     {
-        void Create(T item);
+        void Create(Membership item);
         void Delete(int id);
-        IEnumerable<T> ReadAll();
-        T Read(int id);
-        void Update(T item);
+        Membership Read(int id);
+        IQueryable<Membership> ReadAll();
+        void Update(Membership item);
     }
 }

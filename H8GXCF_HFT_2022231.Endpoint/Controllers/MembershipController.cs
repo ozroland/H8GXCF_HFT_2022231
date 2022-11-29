@@ -9,8 +9,8 @@ namespace H8GXCF_HFT_2022231.Endpoint.Controllers
     [ApiController]
     public class MembershipController : ControllerBase
     {
-        ILogic<Membership> logic;
-        public MembershipController(ILogic<Membership> logic)
+        IMembershipLogic logic;
+        public MembershipController(IMembershipLogic logic)
         {
             this.logic = logic;
         }

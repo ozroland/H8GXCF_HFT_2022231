@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace H8GXCF_HFT_2022231.Repository.Repositories
+namespace H8GXCF_HFT_2022231.Repository.GenericRepository
 {
-    public class Repository<T> : IRepository<T> where T : Entity
+    public abstract class Repository<T> : IRepository<T> where T : class
     {
         protected GymRegisterDbContext ctx;
         public Repository(GymRegisterDbContext ctx)
@@ -21,34 +21,16 @@ namespace H8GXCF_HFT_2022231.Repository.Repositories
             ctx.Set<T>().Add(item);
             ctx.SaveChanges();
         }
-
         public void Delete(int id)
         {
             ctx.Set<T>().Remove(Read(id));
             ctx.SaveChanges();
         }
-
-        public T Read(int id)
-        {
-            return ctx.Set<T>().FirstOrDefault(item => item.Id == id);
-        }
-
+        public abstract T Read(int id);
         public IQueryable<T> ReadAll()
         {
             return ctx.Set<T>();
         }
-
-        public void Update(T item)
-        {
-            var old = Read(item.Id);
-            foreach (var prop in old.GetType().GetProperties())
-            {
-                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
-                {
-                    prop.SetValue(old, prop.GetValue(item));
-                }
-            }
-            ctx.SaveChanges();
-        }
+        public abstract void Update(T item);
     }
 }

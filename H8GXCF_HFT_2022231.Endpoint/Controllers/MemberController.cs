@@ -9,8 +9,8 @@ namespace H8GXCF_HFT_2022231.Endpoint.Controllers
     [ApiController]
     public class MemberController : ControllerBase
     {
-        ILogic<Member> logic;
-        public MemberController(ILogic<Member> logic)
+        IMemberLogic logic;
+        public MemberController(IMemberLogic logic)
         {
             this.logic = logic;
         }

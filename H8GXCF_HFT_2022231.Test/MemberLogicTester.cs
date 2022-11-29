@@ -17,9 +17,9 @@ namespace H8GXCF_HFT_2022231.Test
         MemberLogic memberLogic;
         InstructorLogic instructorLogic;
         MembershipLogic membershipLogic;
-        Mock<IMemberRepository> mockMemberRepository;
-        Mock<IInstructorRepository> mockInstructorRepository;
-        Mock<IMembershipRepository> mockMembershipRepository;
+        Mock<IRepository<Member>> mockMemberRepository;
+        Mock<IRepository<Instructor>> mockInstructorRepository;
+        Mock<IRepository<Membership>> mockMembershipRepository;
         [SetUp]
         public void Init()
         {
@@ -100,13 +100,13 @@ namespace H8GXCF_HFT_2022231.Test
             lipak.Membership = teljes;
             lipak.MembershipID = teljes.Id;
             
-            mockInstructorRepository = new Mock<IInstructorRepository>();
+            mockInstructorRepository = new Mock<IRepository<Instructor>>();
             mockInstructorRepository.Setup(r => r.ReadAll()).Returns(instructors);
 
-            mockMemberRepository = new Mock<IMemberRepository>();
+            mockMemberRepository = new Mock<IRepository<Member>>();
             mockMemberRepository.Setup(r => r.ReadAll()).Returns(members);
 
-            mockMembershipRepository = new Mock<IMembershipRepository>();
+            mockMembershipRepository = new Mock<IRepository<Membership>>();
             mockMembershipRepository.Setup(r => r.ReadAll()).Returns(memberships);
 
             instructorLogic = new InstructorLogic(mockInstructorRepository.Object);

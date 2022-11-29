@@ -25,7 +25,6 @@ namespace H8GXCF_HFT_2022231.Endpoint
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
@@ -35,9 +34,9 @@ namespace H8GXCF_HFT_2022231.Endpoint
             services.AddTransient<IRepository<Membership>, MembershipRepository>();
             services.AddTransient<IRepository<Instructor>, InstructorRepository>();
 
-            services.AddTransient<ILogic<Member>, MemberLogic>();
-            services.AddTransient<ILogic<Membership>, MembershipLogic>();
-            services.AddTransient<ILogic<Instructor>, InstructorLogic>();
+            services.AddTransient<IMemberLogic, MemberLogic>();
+            services.AddTransient<IMembershipLogic, MembershipLogic>();
+            services.AddTransient<IInstructorLogic, InstructorLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -62,25 +61,11 @@ namespace H8GXCF_HFT_2022231.Endpoint
                 var response = new { Msg = exception.Message };
                 await context.Response.WriteAsJsonAsync(response);
             }));
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
-
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
             });
         }
     }

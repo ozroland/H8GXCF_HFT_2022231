@@ -12,7 +12,6 @@ namespace H8GXCF_HFT_2022231.Client
     class RestService
     {
         HttpClient client;
-
         public RestService(string baseurl, string pingableEndpoint = "swagger")
         {
             bool isOk = false;
@@ -103,7 +102,6 @@ namespace H8GXCF_HFT_2022231.Client
             }
             return item;
         }
-
         public void Post<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
@@ -116,7 +114,6 @@ namespace H8GXCF_HFT_2022231.Client
             }
             response.EnsureSuccessStatusCode();
         }
-
         public void Delete(int id, string endpoint)
         {
             HttpResponseMessage response =
@@ -130,7 +127,6 @@ namespace H8GXCF_HFT_2022231.Client
 
             response.EnsureSuccessStatusCode();
         }
-
         public void Put<T>(T item, string endpoint)
         {
             HttpResponseMessage response =
@@ -144,7 +140,6 @@ namespace H8GXCF_HFT_2022231.Client
 
             response.EnsureSuccessStatusCode();
         }
-
     }
     public class RestExceptionInfo
     {

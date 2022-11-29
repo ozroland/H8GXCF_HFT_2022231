@@ -1,4 +1,5 @@
 ﻿{
+  "$schema":  "http://json.schemastore.orgssee/launch"
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,

@@ -9,8 +9,8 @@ namespace H8GXCF_HFT_2022231.Endpoint.Controllers
     [ApiController]
     public class InstructorController : ControllerBase
     {
-        ILogic<Instructor> logic;
-        public InstructorController(ILogic<Instructor> logic)
+        IInstructorLogic logic;
+        public InstructorController(IInstructorLogic logic)
         {
             this.logic = logic;
         }

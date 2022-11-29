@@ -14,8 +14,15 @@ namespace H8GXCF_HFT_2022231.Models
         Female
     }
     [Table("member")]
-    public class Member : Entity
+    public class Member
     {
+        public Member()
+        {
+        }
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual int Id { get; set; }
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
@@ -27,7 +34,6 @@ namespace H8GXCF_HFT_2022231.Models
         [MaxLength(50)]
         public string Email { get; set; }
         [Required]
-        [MaxLength(3)]
         public int Age { get; set; }
         [Required]
         public Gender Gender { get; set; }
